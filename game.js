@@ -14,6 +14,8 @@ function darPista(diferencia) {
   return diferencia <= umbralCaliente ? 'caliente' : 'frío';
 }
 
+let intentos = 0;
+
 function preguntar() {
   rl.question('Tu intento: ', (txt) => {
     if (txt.trim().toLowerCase() === 'salir') {
@@ -34,15 +36,17 @@ function preguntar() {
       return preguntar();
     }
 
+    intentos++;
+
     if (intento === numeroSecreto) {
-      console.log('¡Correcto! 🎉');
+      console.log(`¡Correcto! 🎉 Lo lograste en ${intentos} intento(s).`);
       rl.close();
       return;
     }
 
     const diferencia = Math.abs(numeroSecreto - intento);
     const direccion = intento < numeroSecreto ? 'más alto' : 'más bajo';
-    console.log(`Pista: ${darPista(diferencia)} (${direccion})`);
+    console.log(`Pista: ${darPista(diferencia)} (${direccion}). Intentos: ${intentos}`);
     preguntar();
   });
 }
