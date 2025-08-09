@@ -7,6 +7,9 @@ Repositorio del taller de Git y GitHub. Construí un juego de consola en Node.js
 
 
 Adjunto git log: 
+
+
+
 PS C:\Users\Joseph\colaborador> git log
 commit 51adc6e86c63fa59e23dc6d8b05e0ae90144ffa1 (HEAD -> pistas-niveles, origin/pistas-niveles, origin/main, origin/HEAD, main)
 Author: Joseph Simahan <j.simahan.phys@gmail.com>
