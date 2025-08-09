@@ -4,17 +4,25 @@ const rangoMin = 1;
 const rangoMax = 100;
 const umbralCaliente = 10;
 
-const numeroSecreto = Math.floor(Math.random() * (rangoMax - rangoMin + 1)) + rangoMin;
+function generarSecreto() {
+  return Math.floor(Math.random() * (rangoMax - rangoMin + 1)) + rangoMin;
+}
+
+let numeroSecreto = generarSecreto();
 
 const rl = readline.createInterface({ input: process.stdin, output: process.stdout });
-
-console.log(`Adivina el número (${rangoMin}-${rangoMax}). Escribe "salir" para terminar.`);
 
 function darPista(diferencia) {
   return diferencia <= umbralCaliente ? 'caliente' : 'frío';
 }
 
 let intentos = 0;
+
+function reiniciar() {
+  numeroSecreto = generarSecreto();
+  intentos = 0;
+  console.log(`Adivina el número (${rangoMin}-${rangoMax}). Escribe "salir" para terminar.`);
+}
 
 function preguntar() {
   rl.question('Tu intento: ', (txt) => {
@@ -40,7 +48,14 @@ function preguntar() {
 
     if (intento === numeroSecreto) {
       console.log(`¡Correcto! 🎉 Lo lograste en ${intentos} intento(s).`);
-      rl.close();
+      rl.question('¿Jugar de nuevo? (s/n): ', (r) => {
+        if (r.trim().toLowerCase().startsWith('s')) {
+          reiniciar();
+          preguntar();
+        } else {
+          rl.close();
+        }
+      });
       return;
     }
 
@@ -51,4 +66,5 @@ function preguntar() {
   });
 }
 
+reiniciar();
 preguntar();
